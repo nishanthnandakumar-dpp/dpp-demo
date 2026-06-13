@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Product Passport — Terra &amp; Thread Organic Crew Tee</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --indigo:#1d2b50;--indigo-deep:#141e3a;--indigo-bright:#3a55b4;
+    --cotton:#f6f2e9;--cotton-deep:#ece6d8;--ink:#16171c;--ink-soft:#4a4d57;
+    --verify:#3f7a5e;--verify-soft:#e7f0ea;--line:#ddd6c6;--white:#fffdf8;--shadow:rgba(20,30,58,.10);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',sans-serif;background:var(--cotton);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  ::selection{background:var(--indigo);color:var(--cotton)}
+
+  .topbar{position:sticky;top:0;z-index:50;background:rgba(246,242,233,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  .topbar-inner{max-width:760px;margin:0 auto;padding:12px 20px 0}
+  .brandrow{display:flex;align-items:center;justify-content:space-between;margin-bottom:11px}
+  .brandmark{display:flex;align-items:center;gap:9px;font-weight:600;letter-spacing:-.01em;font-size:15px}
+  .brandmark .dot{width:9px;height:9px;border-radius:50%;background:var(--indigo);position:relative}
+  .brandmark .dot::after{content:"";position:absolute;inset:-4px;border:1px solid var(--indigo);border-radius:50%;opacity:.35}
+  .who{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+
+  /* 4-way access switcher — full width */
+  .seg{display:flex;background:var(--cotton-deep);border:1px solid var(--line);border-radius:100px;padding:3px;position:relative}
+  .seg button{flex:1;font-family:inherit;font-size:12px;font-weight:500;color:var(--ink-soft);background:none;border:none;cursor:pointer;padding:8px 4px;border-radius:100px;position:relative;z-index:2;transition:color .35s ease;white-space:nowrap}
+  .seg button.active{color:var(--cotton)}
+  .seg .glider{position:absolute;top:3px;bottom:3px;left:3px;width:calc(25% - 2px);background:var(--indigo);border-radius:100px;z-index:1;transition:transform .42s cubic-bezier(.7,0,.2,1);box-shadow:0 2px 8px var(--shadow)}
+  body[data-tier="business"] .seg .glider{transform:translateX(100%)}
+  body[data-tier="recycler"] .seg .glider{transform:translateX(200%)}
+  body[data-tier="authority"] .seg .glider{transform:translateX(300%)}
+
+  .access-note{max-width:760px;margin:0 auto;padding:10px 20px;font-size:12px;color:var(--ink-soft);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px}
+  .access-note .pip{width:7px;height:7px;border-radius:50%;background:var(--verify);flex-shrink:0}
+  .access-note b{color:var(--ink);font-weight:600}
+
+  .view{max-width:760px;margin:0 auto;padding:0 20px 90px}
+
+  .hero{padding:42px 0 32px;text-align:center}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--indigo-bright);margin-bottom:20px}
+  .product-stage{width:200px;height:200px;margin:0 auto 26px;border-radius:50%;background:radial-gradient(circle at 50% 38%,#fff 0%,var(--cotton) 62%,var(--cotton-deep) 100%);display:flex;align-items:center;justify-content:center;position:relative;box-shadow:0 24px 60px -28px var(--shadow)}
+  .product-stage::before{content:"";position:absolute;inset:0;border-radius:50%;border:1px dashed var(--line);transform:scale(1.12)}
+  .tshirt{width:124px;height:auto;filter:drop-shadow(0 10px 18px rgba(29,43,80,.16))}
+  h1{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(27px,7vw,40px);line-height:1.05;letter-spacing:-.02em;margin-bottom:11px}
+  .hero .sub{font-size:14.5px;color:var(--ink-soft);max-width:420px;margin:0 auto}
+  .verified-pill{display:inline-flex;align-items:center;gap:7px;margin-top:20px;background:var(--verify-soft);color:var(--verify);font-size:12.5px;font-weight:600;padding:7px 14px;border-radius:100px}
+  .verified-pill svg{width:14px;height:14px}
+  .gs1{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--indigo-bright);background:var(--white);border:1px solid var(--line);border-radius:10px;padding:11px 13px;word-break:break-all;line-height:1.5;margin-top:24px;text-align:left}
+  .gs1 .lbl{color:var(--ink-soft);display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px}
+
+  .section{padding:26px 0;border-top:1px solid var(--line);animation:fade .5s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .section-label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:15px;display:flex;align-items:center;gap:10px}
+  .section-label::before{content:"";width:22px;height:1px;background:var(--indigo-bright)}
+  .section h2{font-family:'Fraunces',serif;font-weight:600;font-size:22px;letter-spacing:-.01em;margin-bottom:12px}
+  .section p{color:var(--ink-soft);font-size:14.5px}
+
+  .specs{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:6px}
+  .spec{background:var(--white);padding:15px 17px}
+  .spec .k{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--ink-soft);font-family:'JetBrains Mono',monospace}
+  .spec .v{font-size:15px;font-weight:500;margin-top:5px;font-family:'Fraunces',serif}
+
+  .certs{display:flex;flex-direction:column;gap:10px;margin-top:6px}
+  .cert{display:flex;align-items:center;gap:14px;background:var(--white);border:1px solid var(--line);border-radius:14px;padding:14px 15px}
+  .cert .badge{width:40px;height:40px;border-radius:10px;flex-shrink:0;background:var(--indigo);color:var(--cotton);display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-weight:600;font-size:15px}
+  .cert .ct{flex:1}.cert .ct .name{font-weight:600;font-size:14px}.cert .ct .desc{font-size:12px;color:var(--ink-soft)}
+  .cert .status{font-size:11px;font-weight:600;color:var(--verify);display:flex;align-items:center;gap:5px;white-space:nowrap}
+  .cert .status svg{width:13px;height:13px}
+
+  .journey{position:relative;margin-top:8px;padding-left:8px}
+  .journey::before{content:"";position:absolute;left:14px;top:8px;bottom:8px;width:2px;background:var(--line)}
+  .stop{position:relative;padding:0 0 24px 40px}.stop:last-child{padding-bottom:0}
+  .stop .node{position:absolute;left:6px;top:2px;width:18px;height:18px;border-radius:50%;background:var(--cotton);border:2px solid var(--indigo);z-index:2}
+  .stop .node.filled{background:var(--indigo)}
+  .stop .place{font-weight:600;font-size:15px}.stop .meta{font-size:13px;color:var(--ink-soft)}
+
+  .care{display:flex;flex-wrap:wrap;gap:9px;margin-top:6px}
+  .chip{background:var(--white);border:1px solid var(--line);border-radius:100px;padding:8px 15px;font-size:13px;display:flex;align-items:center;gap:7px}
+  .chip svg{width:15px;height:15px;color:var(--indigo-bright)}
+
+  .field{display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-bottom:1px solid var(--cotton-deep);font-size:14px}
+  .field:last-child{border-bottom:none}
+  .field .fk{color:var(--ink-soft);font-family:'JetBrains Mono',monospace;font-size:12px;flex-shrink:0}
+  .field .fv{font-weight:500;text-align:right}
+  .field .fv.mono{font-family:'JetBrains Mono',monospace;font-weight:400;font-size:13px}
+
+  .verify-row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--cotton-deep)}
+  .verify-row:last-child{border-bottom:none}
+  .verify-row .vinfo .vn{font-weight:600;font-size:14px}
+  .verify-row .vinfo .vd{font-size:12px;color:var(--ink-soft);font-family:'JetBrains Mono',monospace}
+  .tag-ok{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:var(--verify);background:var(--verify-soft);padding:5px 11px;border-radius:100px;white-space:nowrap}
+  .tag-ok svg{width:13px;height:13px}
+
+  .steps{counter-reset:s;margin-top:6px}
+  .step{display:flex;gap:13px;padding:11px 0;border-bottom:1px solid var(--cotton-deep);font-size:14px}
+  .step:last-child{border-bottom:none}
+  .step .n{counter-increment:s;flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--indigo);color:var(--cotton);font-family:'JetBrains Mono',monospace;font-size:12px;display:flex;align-items:center;justify-content:center}
+  .step .n::before{content:counter(s)}
+  .step .stxt{padding-top:2px}.step .stxt b{font-weight:600}
+
+  .declaration{background:var(--indigo);color:var(--cotton);border-radius:16px;padding:22px;margin-top:8px}
+  .declaration .dtitle{font-family:'Fraunces',serif;font-size:18px;font-weight:600;margin-bottom:9px}
+  .declaration p{font-size:13px;color:rgba(246,242,233,.78);line-height:1.55}
+  .declaration .sig{margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(246,242,233,.6);letter-spacing:.04em}
+
+  .tagnote{display:flex;gap:14px;align-items:flex-start;background:var(--white);border:1px solid var(--line);border-radius:14px;padding:16px 17px;margin-top:24px}
+  .tagnote .ic{width:38px;height:38px;border-radius:9px;background:var(--verify-soft);color:var(--verify);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .tagnote .ic svg{width:20px;height:20px}
+  .tagnote .tn-title{font-weight:600;font-size:14px;margin-bottom:3px}.tagnote .tn-desc{font-size:12.5px;color:var(--ink-soft)}
+
+  /* more-from-brand carousel (consumer only) */
+  .brandmore{padding:26px 0;border-top:1px solid var(--line)}
+  .brandmore .bm-head{font-family:'Fraunces',serif;font-weight:600;font-size:22px;letter-spacing:-.01em;margin-bottom:5px}
+  .brandmore .bm-sub{font-size:12.5px;color:var(--ink-soft);margin-bottom:16px}
+  .carousel{overflow:hidden}
+  .car-track{display:flex;transition:transform .45s cubic-bezier(.7,0,.2,1)}
+  .car-page{min-width:100%;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .pcard{display:flex;flex-direction:column;background:var(--white);border:1px solid var(--line);border-radius:14px;overflow:hidden;text-decoration:none;color:inherit;transition:transform .2s ease,box-shadow .2s ease}
+  .pcard:hover,.pcard:focus-visible{transform:translateY(-3px);box-shadow:0 12px 24px -12px var(--shadow);outline:none}
+  .pcard .pimg{aspect-ratio:1/1;background:radial-gradient(circle at 50% 40%,#fff,var(--cotton-deep));display:flex;align-items:center;justify-content:center}
+  .pcard .pimg svg{width:56%;height:56%}
+  .pcard .pmeta{padding:9px 10px 11px}
+  .pcard .pname{font-size:12px;font-weight:600;line-height:1.25}
+  .pcard .pprice{font-size:11.5px;color:var(--ink-soft);margin-top:2px;font-family:'JetBrains Mono',monospace}
+  .pcard .pshop{margin-top:7px;font-size:10px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--indigo-bright);display:flex;align-items:center;gap:4px}
+  .pcard .pshop svg{width:11px;height:11px}
+  .car-nav{display:flex;align-items:center;justify-content:space-between;margin-top:14px}
+  .car-dots{display:flex;gap:6px}
+  .car-dots span{width:7px;height:7px;border-radius:50%;background:var(--line);transition:background .3s}
+  .car-dots span.on{background:var(--indigo)}
+  .car-arrows{display:flex;gap:8px}
+  .car-arrows button{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:var(--white);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--ink);transition:background .2s,opacity .2s}
+  .car-arrows button:hover:not(:disabled){background:var(--cotton-deep)}
+  .car-arrows button:disabled{opacity:.32;cursor:default}
+  .car-arrows button svg{width:16px;height:16px}
+  @media(max-width:380px){.car-page{gap:7px}.pcard .pname{font-size:11px}.pcard .pmeta{padding:8px 8px 10px}}
+
+  footer{border-top:1px solid var(--line);padding:30px 20px 46px;text-align:center}
+  footer .fbrand{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:14px;margin-bottom:7px}
+  footer .fbrand .dot{width:8px;height:8px;border-radius:50%;background:var(--indigo)}
+  footer p{font-size:12px;color:var(--ink-soft);max-width:380px;margin:0 auto}
+  footer .legal{margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.08em;color:var(--ink-soft);opacity:.7}
+
+  [data-tiers]{display:none}
+  @media(max-width:430px){.seg button{font-size:11px;padding:8px 2px}.brandmark{font-size:14px}.who{display:none}}
+</style>
+</head>
+<body data-tier="consumer">
+
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="brandrow">
+        <div class="brandmark"><span class="dot"></span>Terra&nbsp;&amp;&nbsp;Thread</div>
+        <div class="who" id="who">Consumer view</div>
+      </div>
+      <div class="seg" id="seg">
+        <span class="glider"></span>
+        <button class="active" data-tier="consumer">Consumer</button>
+        <button data-tier="business">Business</button>
+        <button data-tier="recycler">Recycler</button>
+        <button data-tier="authority">Authority</button>
+      </div>
+    </div>
+  </div>
+  <div class="access-note"><span class="pip"></span><span id="accessText">Open to anyone who scans this product — basic info, certifications, care &amp; recycling</span></div>
+
+  <main class="view">
+
+    <!-- HERO: shown to everyone -->
+    <section class="hero">
+      <div class="eyebrow">Digital Product Passport</div>
+      <div class="product-stage">
+        <svg class="tshirt" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <path d="M64 28 L40 44 L26 74 L44 86 L54 72 L54 168 L146 168 L146 72 L156 86 L174 74 L160 44 L136 28 L120 38 Q100 52 80 38 Z" fill="#1d2b50" stroke="#141e3a" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M80 38 Q100 52 120 38" fill="none" stroke="#f6f2e9" stroke-width="3"/>
+        </svg>
+      </div>
+      <h1>The Everyday<br>Organic Crew Tee</h1>
+      <p class="sub">Grown, spun, and finished across South India. Every fibre traceable, every claim verified.</p>
+      <div class="verified-pill">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/></svg>
+        Compliance verified · EU ESPR ready
+      </div>
+      <div class="gs1"><span class="lbl">GS1 Digital Link · the address behind the QR</span>https://id.gs1.org/01/08901234567890/21/TT-OCT-2026-0473</div>
+    </section>
+
+    <!-- ============ CONSUMER ============ -->
+    <section class="section" data-tiers="consumer">
+      <div class="section-label">The material</div>
+      <h2>100% GOTS organic cotton</h2>
+      <p>Single-jersey knit at 180&nbsp;GSM, dyed with low-impact reactive dyes. Made in Tirupur, Tamil Nadu, India.</p>
+      <div class="specs">
+        <div class="spec"><div class="k">Composition</div><div class="v">100% Organic Cotton</div></div>
+        <div class="spec"><div class="k">Fabric weight</div><div class="v">180 GSM</div></div>
+        <div class="spec"><div class="k">Origin</div><div class="v">Tirupur, India</div></div>
+        <div class="spec"><div class="k">Net weight</div><div class="v">165 g</div></div>
+      </div>
+    </section>
+    <section class="section" data-tiers="consumer">
+      <div class="section-label">Where it came from</div>
+      <h2>From boll to garment</h2>
+      <p>Every stage traced back to the raw cotton fibre — no gaps in the chain.</p>
+      <div class="journey">
+        <div class="stop"><span class="node filled"></span><div class="place">Organic cotton farm</div><div class="meta">Kutch, Gujarat · India</div></div>
+        <div class="stop"><span class="node filled"></span><div class="place">Spinning</div><div class="meta">Coimbatore, Tamil Nadu</div></div>
+        <div class="stop"><span class="node filled"></span><div class="place">Knitting &amp; dyeing</div><div class="meta">Tirupur, Tamil Nadu</div></div>
+        <div class="stop"><span class="node"></span><div class="place">Cut, sew &amp; finish</div><div class="meta">Tirupur, Tamil Nadu</div></div>
+      </div>
+    </section>
+    <section class="section" data-tiers="consumer">
+      <div class="section-label">Verified credentials</div>
+      <h2>What backs the claims</h2>
+      <div class="certs">
+        <div class="cert"><div class="badge">G</div><div class="ct"><div class="name">GOTS — Global Organic Textile Standard</div><div class="desc">Organic fibre, processing &amp; social criteria</div></div><div class="status"><svg viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Valid</div></div>
+        <div class="cert"><div class="badge">Ø</div><div class="ct"><div class="name">OEKO-TEX Standard 100</div><div class="desc">Tested for harmful substances</div></div><div class="status"><svg viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Valid</div></div>
+      </div>
+    </section>
+    <section class="section" data-tiers="consumer">
+      <div class="section-label">Care &amp; repair</div>
+      <h2>Keep it living longer</h2>
+      <div class="care">
+        <div class="chip"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12a8 8 0 0116 0M4 12l-2-2M4 12l2-2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Wash cold · 30°C</div>
+        <div class="chip"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3v12m0 0l4-4m-4 4l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Line dry</div>
+        <div class="chip"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" stroke-width="2"/></svg>Iron medium</div>
+        <div class="chip"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2v20M2 12h20" stroke="currentColor" stroke-width="2"/></svg>Do not bleach</div>
+      </div>
+      <p style="margin-top:14px">Small hole or loose seam? A simple running-stitch mend keeps this tee in rotation for years. Repair guide available in-app.</p>
+    </section>
+    <section class="section" data-tiers="consumer">
+      <div class="section-label">At end of life</div>
+      <h2>Don't bin it — recycle it</h2>
+      <p>This is a single-fibre cotton garment, which makes it easy to recycle. Drop it at any textile recycling point, or return it through our take-back scheme.</p>
+    </section>
+
+    <section class="brandmore" data-tiers="consumer">
+      <div class="section-label">More from this brand</div>
+      <div class="bm-head">Pair it with the rest</div>
+      <div class="bm-sub">Tap any item to open the brand's store or Amazon listing.</div>
+      <div class="carousel">
+        <div class="car-track" id="carTrack">
+          <div class="car-page">
+            <a class="pcard" href="#" target="_blank" rel="noopener">
+              <div class="pimg"><svg viewBox="0 0 64 64"><path d="M24 10 L14 16 L17 30 L22 28 L22 54 L42 54 L42 28 L47 30 L50 16 L40 10 L32 13 Z" fill="#1d2b50"/><line x1="32" y1="13" x2="32" y2="54" stroke="#f6f2e9" stroke-width="1.5"/></svg></div>
+              <div class="pmeta"><div class="pname">Relaxed Denim Jacket</div><div class="pprice">€89</div><div class="pshop">Shop<svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+            </a>
+            <a class="pcard" href="#" target="_blank" rel="noopener">
+              <div class="pimg"><svg viewBox="0 0 64 64"><path d="M20 8 H44 L45 54 H36 L33 26 Q32 22 31 26 L28 54 H19 Z" fill="#1d2b50"/></svg></div>
+              <div class="pmeta"><div class="pname">Slim Organic Jeans</div><div class="pprice">€69</div><div class="pshop">Shop<svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+            </a>
+            <a class="pcard" href="#" target="_blank" rel="noopener">
+              <div class="pimg"><svg viewBox="0 0 64 64"><rect x="12" y="20" width="40" height="26" rx="4" fill="#1d2b50"/><rect x="37" y="28" width="13" height="10" rx="2" fill="#f6f2e9"/><circle cx="44" cy="33" r="2" fill="#1d2b50"/></svg></div>
+              <div class="pmeta"><div class="pname">Leather Wallet</div><div class="pprice">€45</div><div class="pshop">Shop<svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+            </a>
+          </div>
+          <div class="car-page">
+            <a class="pcard" href="#" target="_blank" rel="noopener">
+              <div class="pimg"><svg viewBox="0 0 64 64"><path d="M10 40 Q10 30 18 30 L30 30 L44 40 L54 42 Q58 43 58 47 L58 50 L10 50 Z" fill="#1d2b50"/><path d="M20 33 L24 40 M28 32 L32 39" stroke="#f6f2e9" stroke-width="2" stroke-linecap="round"/></svg></div>
+              <div class="pmeta"><div class="pname">Canvas Sneakers</div><div class="pprice">€75</div><div class="pshop">Shop<svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+            </a>
+            <a class="pcard" href="#" target="_blank" rel="noopener">
+              <div class="pimg"><svg viewBox="0 0 64 64"><path d="M24 10 L14 16 L18 28 L23 26 L23 54 L41 54 L41 26 L46 28 L50 16 L40 10 L36 16 L32 19 L28 16 Z" fill="#1d2b50"/><line x1="32" y1="19" x2="32" y2="54" stroke="#f6f2e9" stroke-width="1"/><circle cx="32" cy="29" r="1" fill="#f6f2e9"/><circle cx="32" cy="38" r="1" fill="#f6f2e9"/></svg></div>
+              <div class="pmeta"><div class="pname">Oxford Shirt</div><div class="pprice">€59</div><div class="pshop">Shop<svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+            </a>
+            <a class="pcard" href="#" target="_blank" rel="noopener">
+              <div class="pimg"><svg viewBox="0 0 64 64"><path d="M18 24 H46 L48 52 H16 Z" fill="#1d2b50"/><path d="M24 24 V18 Q24 12 32 12 Q40 12 40 18 V24" fill="none" stroke="#1d2b50" stroke-width="3"/></svg></div>
+              <div class="pmeta"><div class="pname">Canvas Tote Bag</div><div class="pprice">€39</div><div class="pshop">Shop<svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="car-nav">
+        <div class="car-dots"><span class="on"></span><span></span></div>
+        <div class="car-arrows">
+          <button id="carPrev" aria-label="Previous products" disabled><svg viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <button id="carNext" aria-label="More products"><svg viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ BUSINESS ============ -->
+    <section class="section" data-tiers="business authority">
+      <div class="section-label">Full material declaration</div>
+      <div class="field"><span class="fk">Fibre composition</span><span class="fv">100% Organic Cotton (GOTS)</span></div>
+      <div class="field"><span class="fk">Yarn count</span><span class="fv">30s combed ring-spun</span></div>
+      <div class="field"><span class="fk">Dye class</span><span class="fv">Low-impact reactive</span></div>
+      <div class="field"><span class="fk">SVHC (REACH)</span><span class="fv">None above 0.1% threshold</span></div>
+      <div class="field"><span class="fk">Carbon footprint</span><span class="fv">4.1 kg CO₂e / unit</span></div>
+      <div class="field"><span class="fk">Water (cradle-to-gate)</span><span class="fv">820 L / unit</span></div>
+    </section>
+    <section class="section" data-tiers="business authority">
+      <div class="section-label">Certificate verification</div>
+      <div class="verify-row"><div class="vinfo"><div class="vn">GOTS</div><div class="vd">Cert 2026-0098214 · exp 2027-03-31</div></div><span class="tag-ok"><svg viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Verified · DB match</span></div>
+      <div class="verify-row"><div class="vinfo"><div class="vn">OEKO-TEX Standard 100</div><div class="vd">Cert SH025-184432 · exp 2027-01-15</div></div><span class="tag-ok"><svg viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Verified · DB match</span></div>
+      <div class="verify-row"><div class="vinfo"><div class="vn">RSL test report</div><div class="vd">NABL lab · report 2026/TX/5521</div></div><span class="tag-ok"><svg viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>On file</span></div>
+    </section>
+
+    <section class="section" data-tiers="business authority">
+      <div class="section-label">Durability &amp; testing</div>
+      <div class="field"><span class="fk">Pilling resistance</span><span class="fv">Grade 4–5 · ISO 12945-2</span></div>
+      <div class="field"><span class="fk">Colourfastness to wash</span><span class="fv">Grade 4 · ISO 105-C06</span></div>
+      <div class="field"><span class="fk">Dimensional stability</span><span class="fv">≤ 3% · ISO 6330</span></div>
+      <div class="field"><span class="fk">Recycled content</span><span class="fv">0% (virgin organic)</span></div>
+    </section>
+
+    <!-- ============ RECYCLER / REPAIRER ============ -->
+    <section class="section" data-tiers="recycler authority">
+      <div class="section-label">Composition for recovery</div>
+      <h2>Mono-material — fully recyclable</h2>
+      <div class="field"><span class="fk">Main fibre</span><span class="fv">100% Cotton</span></div>
+      <div class="field"><span class="fk">Sewing thread</span><span class="fv">Cotton (same stream)</span></div>
+      <div class="field"><span class="fk">Trims / hardware</span><span class="fv">None</span></div>
+      <div class="field"><span class="fk">Recoverable fibre</span><span class="fv">≈ 96% by weight</span></div>
+    </section>
+    <section class="section" data-tiers="recycler authority">
+      <div class="section-label">Disassembly instructions</div>
+      <div class="steps">
+        <div class="step"><span class="n"></span><span class="stxt"><b>Remove the offset QR tag</b> at the inner side seam — peel-free, single cut.</span></div>
+        <div class="step"><span class="n"></span><span class="stxt"><b>No trims to separate</b> — no zips, buttons, or metal fastenings.</span></div>
+        <div class="step"><span class="n"></span><span class="stxt"><b>Send whole to cotton recycling</b> — thread and body share one fibre stream.</span></div>
+      </div>
+    </section>
+    <section class="section" data-tiers="recycler authority">
+      <div class="section-label">Hazardous substances</div>
+      <div class="field"><span class="fk">SVHC screen</span><span class="fv">None above threshold</span></div>
+      <div class="field"><span class="fk">Restricted dyes</span><span class="fv">None — OEKO-TEX passed</span></div>
+      <div class="field"><span class="fk">Take-back scheme</span><span class="fv">Supported by operator</span></div>
+    </section>
+
+    <!-- ============ AUTHORITY ONLY ============ -->
+    <section class="section" data-tiers="authority">
+      <div class="section-label">Supply chain traceability</div>
+      <div class="journey">
+        <div class="stop"><span class="node filled"></span><div class="place">Organic cotton farm</div><div class="meta">Kutch, Gujarat · Facility IN-GJ-0421</div></div>
+        <div class="stop"><span class="node filled"></span><div class="place">Spinning mill</div><div class="meta">Coimbatore, TN · Facility IN-TN-1188</div></div>
+        <div class="stop"><span class="node filled"></span><div class="place">Knitting &amp; dyeing</div><div class="meta">Tirupur, TN · Facility IN-TN-2043</div></div>
+        <div class="stop"><span class="node"></span><div class="place">Cut, sew &amp; finish</div><div class="meta">Tirupur, TN · Facility IN-TN-2043</div></div>
+      </div>
+    </section>
+    <section class="section" data-tiers="authority">
+      <div class="section-label">Operator &amp; conformity</div>
+      <div class="field"><span class="fk">Economic operator</span><span class="fv">Terra &amp; Thread Exports Pvt Ltd</span></div>
+      <div class="field"><span class="fk">EORI</span><span class="fv mono">IN294857361029</span></div>
+      <div class="field"><span class="fk">GTIN (01)</span><span class="fv mono">08901234567890</span></div>
+      <div class="field"><span class="fk">Commodity code</span><span class="fv mono">6109 10 00</span></div>
+      <div class="field"><span class="fk">Batch</span><span class="fv mono">TIR-2026-W14</span></div>
+      <div class="declaration" style="margin-top:18px">
+        <div class="dtitle">Declaration of conformity</div>
+        <p>The economic operator declares that this product and its digital product passport meet the applicable requirements of Regulation (EU) 2024/1781 and the relevant delegated act for textile products.</p>
+        <div class="sig">Last verified 2026-04-09 · Record DPP-TT-0473 · Backup host active</div>
+      </div>
+    </section>
+
+    <!-- shown to everyone -->
+    <div class="tagnote">
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/><rect x="13" y="4" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/><rect x="4" y="13" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/><path d="M13 13h3v3M20 16v4M16 20h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      <div><div class="tn-title">Built to outlast the garment</div><div class="tn-desc">An offset-printed QR tag with a protective top layer and a soft fibre backing — A-grade durability that survives washing and wear for years. No peel-off labels, no broken links.</div></div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="fbrand"><span class="dot"></span>Digital Product Passport</div>
+    <p>Compliance &amp; traceability infrastructure for Indian exporters selling into Europe.</p>
+    <div class="legal">DEMO RECORD · FICTIONAL PRODUCT · FOR DEMONSTRATION ONLY</div>
+  </footer>
+
+<script>
+  const seg=document.getElementById('seg');
+  const btns=seg.querySelectorAll('button');
+  const accessText=document.getElementById('accessText');
+  const who=document.getElementById('who');
+  const meta={
+    consumer:{who:'Consumer view',txt:'Open to anyone who scans this product — basic info, certifications, care &amp; recycling'},
+    business:{who:'Business view',txt:'Verified supply-chain partners — full material, impact &amp; certificate detail'},
+    recycler:{who:'Recycler view',txt:'Professional repairers &amp; recyclers — disassembly, composition &amp; end-of-life data'},
+    authority:{who:'Authority view',txt:'Market surveillance &amp; customs — the full regulatory dataset'}
+  };
+  function applyTier(t){
+    document.body.dataset.tier=t;
+    document.querySelectorAll('[data-tiers]').forEach(s=>{
+      s.style.display = s.dataset.tiers.split(' ').includes(t) ? 'block' : 'none';
+    });
+    accessText.innerHTML=meta[t].txt;
+    who.textContent=meta[t].who;
+  }
+  btns.forEach(b=>b.addEventListener('click',()=>{
+    btns.forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    applyTier(b.dataset.tier);
+    window.scrollTo({top:0,behavior:'smooth'});
+  }));
+  applyTier('consumer');
+
+  // brand carousel
+  const track=document.getElementById('carTrack');
+  const prev=document.getElementById('carPrev');
+  const next=document.getElementById('carNext');
+  const dots=document.querySelectorAll('.car-dots span');
+  let page=0; const pages=2;
+  function renderCar(){
+    track.style.transform=`translateX(-${page*100}%)`;
+    dots.forEach((d,i)=>d.classList.toggle('on',i===page));
+    prev.disabled=page===0; next.disabled=page===pages-1;
+  }
+  prev.addEventListener('click',()=>{if(page>0){page--;renderCar();}});
+  next.addEventListener('click',()=>{if(page<pages-1){page++;renderCar();}});
+  renderCar();
+</script>
+</body>
+</html>
