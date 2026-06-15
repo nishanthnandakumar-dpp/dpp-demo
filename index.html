@@ -89,6 +89,14 @@
   .field .fv{font-weight:500;text-align:right}
   .field .fv.mono{font-family:'JetBrains Mono',monospace;font-weight:400;font-size:13px}
 
+  .scorecard{display:flex;align-items:center;gap:18px;background:var(--indigo);border-radius:14px;padding:18px 20px;margin:2px 0 16px}
+  .scorebox{text-align:center;flex-shrink:0;min-width:96px}
+  .scoreval{font-family:'Fraunces',serif;font-weight:600;font-size:40px;color:var(--cotton);line-height:1}
+  .scoreval .scoremax{font-size:18px;color:#9fb0e0;font-weight:400}
+  .scorelbl{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:#9fb0e0;margin-top:7px}
+  .scoreinfo{border-left:1px solid rgba(255,255,255,.16);padding-left:18px}
+  .scorename{font-weight:600;font-size:14px;color:var(--cotton)}
+  .scoredesc{font-size:12.5px;color:#c2cbe6;margin-top:4px;line-height:1.45}
   .verify-row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--cotton-deep)}
   .verify-row:last-child{border-bottom:none}
   .verify-row .vinfo .vn{font-weight:600;font-size:14px}
@@ -291,6 +299,7 @@
       <div class="field"><span class="fk">SVHC (REACH)</span><span class="fv">None above 0.1% threshold</span></div>
       <div class="field"><span class="fk">Carbon footprint</span><span class="fv">4.1 kg CO₂e / unit</span></div>
       <div class="field"><span class="fk">Water (cradle-to-gate)</span><span class="fv">820 L / unit</span></div>
+      <div class="field"><span class="fk">PEF single score</span><span class="fv">0.18 mPt · voluntary</span></div>
     </section>
     <section class="section" data-tiers="business authority">
       <div class="section-label">Certificate verification</div>
@@ -301,9 +310,20 @@
 
     <section class="section" data-tiers="business authority">
       <div class="section-label">Durability &amp; testing</div>
+      <div class="scorecard">
+        <div class="scorebox">
+          <div class="scoreval">8.4<span class="scoremax">/10</span></div>
+          <div class="scorelbl">Durability score</div>
+        </div>
+        <div class="scoreinfo">
+          <div class="scorename">JRC robustness method</div>
+          <div class="scoredesc">A composite 0–10 score derived from ISO durability tests measured after 5 washes — the headline metric proposed in the EU textile preparatory study.</div>
+        </div>
+      </div>
       <div class="field"><span class="fk">Pilling resistance</span><span class="fv">Grade 4–5 · ISO 12945-2</span></div>
       <div class="field"><span class="fk">Colourfastness to wash</span><span class="fv">Grade 4 · ISO 105-C06</span></div>
       <div class="field"><span class="fk">Dimensional stability</span><span class="fv">≤ 3% · ISO 6330</span></div>
+      <div class="field"><span class="fk">Recyclability score</span><span class="fv">9 / 10 · mono-material</span></div>
       <div class="field"><span class="fk">Recycled content</span><span class="fv">0% (virgin organic)</span></div>
     </section>
 
